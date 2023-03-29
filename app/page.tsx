@@ -42,7 +42,7 @@ export default function Home() {
               {data.map((item, id) => (
                 <tr key={id}>
                   <td className="border-b border-slate-800 p-4 text-slate-400">
-                    <div className="flex w-12 items-center justify-center bg-yellow-400 py-1 text-xs uppercase tracking-wider text-black">
+                    <div className="flex w-12 items-center justify-center rounded-sm bg-yellow-400 py-1 text-xs uppercase tracking-wider text-black">
                       Swap
                     </div>
                   </td>
