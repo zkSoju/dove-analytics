@@ -26,6 +26,12 @@ export default function Home() {
                   Reserve 1
                 </th>
                 <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
+                  Reserve 0 Cumulative
+                </th>
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
+                  Reserve 1 Cumulative
+                </th>
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
                   Voucher 0
                 </th>
                 <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
@@ -47,6 +53,14 @@ export default function Home() {
                   </td>
                   <td className="border-b border-slate-800 p-4 text-slate-400">
                     {item.beforeReserve1.toString()}→{item.reserve1.toString()}
+                  </td>
+                  <td className="border-b border-slate-800 p-4 text-slate-400">
+                    {item.beforeReserve0Cumulative.toString()}→
+                    {item.reserve0Cumulative.toString()}
+                  </td>
+                  <td className="border-b border-slate-800 p-4 text-slate-400">
+                    {item.beforeReserve1Cumulative.toString()}→
+                    {item.reserve1Cumulative.toString()}
                   </td>
                   <td className="border-b border-slate-800 p-4 text-slate-400">
                     {item.beforeVoucher0.toString()}→{item.voucher0.toString()}

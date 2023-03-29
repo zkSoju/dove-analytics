@@ -14,6 +14,10 @@ interface AmmData {
   reserve0: bigint;
   beforeReserve1: bigint;
   reserve1: bigint;
+  beforeReserve0Cumulative: bigint;
+  reserve0Cumulative: bigint;
+  beforeReserve1Cumulative: bigint;
+  reserve1Cumulative: bigint;
   beforeVoucher0: bigint;
   voucher0: bigint;
   beforeVoucher1: bigint;
@@ -63,6 +67,10 @@ export default function useAmmData(): AmmData[] {
           reserve0,
           beforeReserve1,
           reserve1,
+          beforeReserve0Cumulative,
+          reserve0Cumulative,
+          beforeReserve1Cumulative,
+          reserve1Cumulative,
           beforeVoucher0,
           voucher0,
           beforeVoucher1,
@@ -117,6 +125,30 @@ export default function useAmmData(): AmmData[] {
             blockNumber: logBlockNumber,
           }),
           L2Client.readContract({
+            address: PAIR_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: pairAbi,
+            functionName: "reserve0CumulativeLast",
+            blockNumber: logBlockNumber - 1n,
+          }),
+          L2Client.readContract({
+            address: PAIR_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: pairAbi,
+            functionName: "reserve0CumulativeLast",
+            blockNumber: logBlockNumber,
+          }),
+          L2Client.readContract({
+            address: PAIR_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: pairAbi,
+            functionName: "reserve1CumulativeLast",
+            blockNumber: logBlockNumber - 1n,
+          }),
+          L2Client.readContract({
+            address: PAIR_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: pairAbi,
+            functionName: "reserve1CumulativeLast",
+            blockNumber: logBlockNumber,
+          }),
+          L2Client.readContract({
             address: vUSDT_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
             abi: erc20ABI,
             functionName: "balanceOf",
@@ -161,6 +193,10 @@ export default function useAmmData(): AmmData[] {
             voucher0,
             beforeVoucher1,
             voucher1,
+            beforeReserve0Cumulative,
+            reserve0Cumulative,
+            beforeReserve1Cumulative,
+            reserve1Cumulative,
           },
         ]);
       });
