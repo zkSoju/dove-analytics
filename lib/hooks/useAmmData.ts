@@ -1,8 +1,9 @@
 import { pairAbi } from "@/abis/Pair";
-import { PAIR_ADDRESS } from "@/lib/addresses";
+import { PAIR_ADDRESS, vUSDC_ADDRESS, vUSDT_ADDRESS } from "@/lib/addresses";
 import { useEffect, useState } from "react";
 import { createPublicClient, fallback, getAbiItem, http } from "viem";
 import { arbitrumGoerli } from "viem/chains";
+import { erc20ABI } from "wagmi";
 
 interface AmmData {
   beforeBalance0: bigint;
@@ -13,6 +14,10 @@ interface AmmData {
   reserve0: bigint;
   beforeReserve1: bigint;
   reserve1: bigint;
+  beforeVoucher0: bigint;
+  voucher0: bigint;
+  beforeVoucher1: bigint;
+  voucher1: bigint;
 }
 
 export default function useAmmData(): AmmData[] {
@@ -58,6 +63,10 @@ export default function useAmmData(): AmmData[] {
           reserve0,
           beforeReserve1,
           reserve1,
+          beforeVoucher0,
+          voucher0,
+          beforeVoucher1,
+          voucher1,
         ] = await Promise.all([
           L2Client.readContract({
             address: PAIR_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
@@ -107,6 +116,34 @@ export default function useAmmData(): AmmData[] {
             functionName: "reserve1",
             blockNumber: logBlockNumber,
           }),
+          L2Client.readContract({
+            address: vUSDT_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: erc20ABI,
+            functionName: "balanceOf",
+            args: [log.args.sender],
+            blockNumber: logBlockNumber - 1n,
+          }),
+          L2Client.readContract({
+            address: vUSDT_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: erc20ABI,
+            functionName: "balanceOf",
+            args: [log.args.sender],
+            blockNumber: logBlockNumber,
+          }),
+          L2Client.readContract({
+            address: vUSDC_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: erc20ABI,
+            functionName: "balanceOf",
+            args: [log.args.to],
+            blockNumber: logBlockNumber - 1n,
+          }),
+          L2Client.readContract({
+            address: vUSDC_ADDRESS[arbitrumGoerli.id] as `0x${string}`,
+            abi: erc20ABI,
+            functionName: "balanceOf",
+            args: [log.args.to],
+            blockNumber: logBlockNumber,
+          }),
         ]);
 
         setAmmData((prev) => [
@@ -120,6 +157,10 @@ export default function useAmmData(): AmmData[] {
             reserve0,
             beforeReserve1,
             reserve1,
+            beforeVoucher0,
+            voucher0,
+            beforeVoucher1,
+            voucher1,
           },
         ]);
       });

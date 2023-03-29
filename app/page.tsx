@@ -13,17 +13,23 @@ export default function Home() {
           <table className="w-full table-auto text-sm text-white">
             <thead>
               <tr className="text-left">
-                <th className="border-b p-4 pt-0 pb-3 text-left font-medium text-slate-400 dark:border-slate-600 dark:text-slate-200">
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
                   Balance 0
                 </th>
-                <th className="border-b p-4 pt-0 pb-3 text-left font-medium text-slate-400 dark:border-slate-600 dark:text-slate-200">
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
                   Balance 1
                 </th>
-                <th className="border-b p-4 pt-0 pb-3 text-left font-medium text-slate-400 dark:border-slate-600 dark:text-slate-200">
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
                   Reserve 0
                 </th>
-                <th className="border-b p-4 pt-0 pb-3 text-left font-medium text-slate-400 dark:border-slate-600 dark:text-slate-200">
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
                   Reserve 1
+                </th>
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
+                  Voucher 0
+                </th>
+                <th className="border-b border-slate-600 p-4 pt-0 pb-3 text-left font-medium text-slate-200">
+                  Voucher 1
                 </th>
               </tr>
             </thead>
@@ -41,6 +47,12 @@ export default function Home() {
                   </td>
                   <td className="border-b border-slate-800 p-4 text-slate-400">
                     {item.beforeReserve1.toString()}→{item.reserve1.toString()}
+                  </td>
+                  <td className="border-b border-slate-800 p-4 text-slate-400">
+                    {item.beforeVoucher0.toString()}→{item.voucher0.toString()}
+                  </td>
+                  <td className="border-b border-slate-800 p-4 text-slate-400">
+                    {item.beforeVoucher1.toString()}→{item.voucher1.toString()}
                   </td>
                 </tr>
               ))}
